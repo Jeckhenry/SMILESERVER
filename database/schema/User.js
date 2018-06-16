@@ -8,9 +8,11 @@ const SALT_WORK_FACTOR = 10;
 const UserSchema = new Schema({
     UserId: ObjectId,//{type:ObjectId}
     UserName:{unique:true,type:String},
-    password:String,
+    password:{type:String},
     creatAt: {type:Date,default:Date.now()},
     lastLoginAt:{type:Date,default:Date.now()}
+},{
+    collection:'user'
 });
 //加盐(密码加密)
 UserSchema.pre('save',function(next){
