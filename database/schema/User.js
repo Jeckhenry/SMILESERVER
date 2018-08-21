@@ -26,7 +26,18 @@ UserSchema.pre('save',function(next){
             next();
         });
     });
-})
+});
+
+UserSchema.methods = {
+    comparePassword:(_password,password)=>{
+        return new Promise((resolve,reject)=>{
+            bcrypt.compare(_password,password,(err,iswatch)=>{
+                if(!err) resolve(iswatch);
+                else reject(err);
+            })
+        })
+    }
+}
 
 //发布
 mongoose.model('User',UserSchema);
